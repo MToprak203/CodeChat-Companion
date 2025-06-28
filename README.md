@@ -125,3 +125,16 @@ conversation no longer causes an automatic reply from the assistant.
 - `/ws/{userId}/notifications` – system-wide notifications
 - `/ws/{userId}/projects/{projectId}/selected-files` – project file selection updates
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## TODO
+
+- [ ] Add unit tests for backend
+- [ ] Improve frontend UX for file selection
+- [ ] Implement file diff view on project uploads
+- [ ] Implement support for multi-user chat functionality in frontend
+- [ ] Enhance the AI assistant’s memory to better retain and utilize context throughout the conversation
+- [ ] Implement a system that allows the AI assistant to execute user-provided scripts securely and efficiently
+
