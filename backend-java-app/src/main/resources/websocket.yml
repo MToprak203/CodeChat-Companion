@@ -1,0 +1,4 @@
+websocket:
+  ready:
+    interval: ${WEBSOCKET_READY_INTERVAL_MILLIS:500}
+    timeout-duration: ${WEBSOCKET_READY_TIMEOUT_DURATION_SECONDS:10}

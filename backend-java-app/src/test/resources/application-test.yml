@@ -1,0 +1,8 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+app:
+  jwt:
+    secret: thisisasecretkeythisisasecretkey
+    expirationSeconds: 30

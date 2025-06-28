@@ -1,0 +1,3 @@
+redis:
+  ttl:
+    ready-flag: ${REDIS_TTL_SECONDS_READY_FLAG:3600}

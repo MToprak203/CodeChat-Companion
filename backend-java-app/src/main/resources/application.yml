@@ -1,0 +1,66 @@
+instance: ${INSTANCE_NAME:node-1}
+
+spring:
+  application:
+    name: ai_assistant
+
+  profiles:
+    active: ${ENV:local}
+
+  config:
+    import: resilience4j.yml, database.yml, kafka-binding.yml, redis.yml, websocket.yml
+
+  jackson:
+    mapper:
+      sort-properties-alphabetically: true
+
+management:
+  endpoints:
+    prometheus:
+      enabled: true
+    web:
+      exposure:
+        include: health,info,metrics,loggers,env,prometheus
+        exclude: shutdown
+  metrics:
+    enable:
+      all: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: '@project.name@'
+    description: '@project.description@'
+    version: '@project.version@'
+  build:
+    artifact: '@project.artifactId@'
+    group: '@project.groupId@'
+    time: '@maven.build.timestamp@'
+  git:
+    commit:
+      id: '@git.commit.id@'
+      time: '@git.commit.time@'
+    branch: '@git.branch@'
+  environment:
+    profiles: '${spring.profiles.active}'
+  team:
+    owner: 'Mustafa Toprak'
+    support: 'mustafa.toprak@ileti.org.tr'
+    slack: '#ai-assistant'
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:a-string-secret-at-least-256-bits-long}
+    expirationSeconds: ${JWT_EXPIRATION_SECONDS:3600}
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    accessKey: ${MINIO_ACCESS_KEY:minioadmin}
+    secretKey: ${MINIO_SECRET_KEY:minioadmin}
+    bucket: ${MINIO_BUCKET:projects}
+  ai:
+    base-url: ${APP_AI_BASE_URL:http://localhost:8000}
+  chat:
+    history:
+      count: ${CHAT_HISTORY_COUNT:5}

@@ -1,0 +1,23 @@
+spring:
+  r2dbc:
+    url: r2dbc:pool://noop # disable the default Spring Boot R2DBC auto‐configured CF
+  flyway:
+    url: ${PRIMARY_DB_URL_FLYWAY:jdbc:postgresql://primary:5432/assistant}
+    user: ${PRIMARY_DB_USERNAME:youruser}
+    password: ${PRIMARY_DB_PASSWORD:yourpass}
+    locations: classpath:db/migration
+
+app:
+  datasource:
+    primary:
+      url: ${PRIMARY_DB_URL:r2dbc:postgresql://primary:5432/assistant}
+      username: ${PRIMARY_DB_USERNAME:youruser}
+      password: ${PRIMARY_DB_PASSWORD:yourpass}
+
+    replicas:
+      - url: ${REPLICA_1_DB_URL:r2dbc:postgresql://replica1:5432/assistant}
+        username: ${REPLICA_1_DB_USERNAME:youruser}
+        password: ${REPLICA_1_DB_PASSWORD:yourpass}
+      - url: ${REPLICA_2_DB_URL:r2dbc:postgresql://replica2:5432/assistant}
+        username: ${REPLICA_2_DB_USERNAME:youruser}
+        password: ${REPLICA_2_DB_PASSWORD:yourpass}

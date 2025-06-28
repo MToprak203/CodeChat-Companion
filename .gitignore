@@ -1,0 +1,34 @@
+# Ignore environment files for the Python backend
+# Global gitignore for the entire project
+# Environment files
+.env
+backend-python-app/.env
+
+# Node
+node_modules/
+frontend-app/node_modules/
+frontend-app/dist/
+frontend-app/build/
+
+# Python
+backend-python-app/.venv/
+backend-python-app/venv/
+backend-python-app/__pycache__/
+backend-python-app/hf_cache
+backend-python-app/pip_cache
+__pycache__/
+*.py[cod]
+
+# Java
+backend-java-app/target/
+backend-java-app/.mvn
+**/target/
+
+# IDE and tooling folders
+.idea/
+.vscode/
+
+# Misc
+*.log
+.DS_Store
+Thumbs.db

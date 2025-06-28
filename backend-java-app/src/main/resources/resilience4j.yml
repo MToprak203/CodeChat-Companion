@@ -1,0 +1,77 @@
+resilience4j:
+
+  circuitbreaker:
+    metrics:
+      enabled: true
+    instances:
+      redis:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        waitDurationInOpenState: 5s
+
+      ai-service:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        slidingWindowType: COUNT_BASED
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+      db:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 3
+
+  retry:
+    metrics:
+      enabled: true
+    instances:
+      kafka:
+        max-attempts: 5
+        wait-duration: 1s
+        retry-exceptions:
+          - org.apache.kafka.common.errors.TimeoutException
+          - java.io.IOException
+        ignore-exceptions:
+          - com.ai.assistant.core.error.ApplicationException
+
+      redis:
+        maxAttempts: 3
+        waitDuration: 500ms
+        ignore-exceptions:
+          - com.ai.assistant.core.error.ApplicationException
+
+      web-client:
+        max-attempts: 3
+        wait-duration: 500ms
+        retry-exceptions:
+          - java.io.IOException
+        ignore-exceptions:
+          - org.springframework.web.reactive.function.client.WebClientResponseException.BadRequest
+          - org.springframework.web.reactive.function.client.WebClientResponseException.NotFound
+
+      db:
+        maxAttempts: 3
+        waitDuration: 500ms
+        retryExceptions:
+          - org.springframework.dao.RecoverableDataAccessException
+          - java.sql.SQLTransientConnectionException
+
+  timelimiter:
+    instances:
+      redis:
+        timeoutDuration: 2s
+        cancelRunningFuture: true
+
+      db:
+        timeoutDuration: 2s
+
+      ai-service:
+        timeoutDuration: 60s
+
+      web-client:
+        timeoutDuration: 60s

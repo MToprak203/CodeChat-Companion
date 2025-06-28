@@ -1,0 +1,44 @@
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  cloud:
+    function:
+      definition: projectUploaded;conversationCleanup;projectCleanup
+    stream:
+      bindings:
+        projectUploaded-out:
+          destination: projectUploaded
+          content-type: application/json
+
+        conversationCleanup-out:
+          destination: conversationCleanup
+          content-type: application/json
+
+        projectCleanup-out:
+          destination: projectCleanup
+          content-type: application/json
+
+        projectUploaded-in-0:
+          destination: projectUploaded
+          group: project-service
+          content-type: application/json
+          consumer:
+            batch-mode: true
+
+        conversationCleanup-in-0:
+          destination: conversationCleanup
+          group: project-service
+          content-type: application/json
+          consumer:
+            batch-mode: true
+
+        projectCleanup-in-0:
+          destination: projectCleanup
+          group: project-service
+          content-type: application/json
+          consumer:
+            batch-mode: true
+
+      kafka:
+        binder:
+          brokers: localhost:9092
