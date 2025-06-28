@@ -2,6 +2,31 @@
 
 This repository contains a simple chat application with a React front-end and a Spring WebFlux backend.
 
+## Architecture
+
+```mermaid
+graph TD
+  subgraph Frontend
+    A[React App]
+  end
+  subgraph Backend
+    B[Spring WebFlux]
+    C[(PostgreSQL)]
+    D[(Redis)]
+    E[(Kafka)]
+    F[(Minio)]
+  end
+  subgraph "Python AI Service"
+    G[FastAPI]
+  end
+  A -->|REST| B
+  B -->|HTTP| G
+  B --> C
+  B --> D
+  B --> E
+  B --> F
+```
+
 ## Prerequisites
 - Node.js 20+
 - Java 21+
