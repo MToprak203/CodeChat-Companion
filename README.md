@@ -27,6 +27,14 @@ graph TD
   B --> F
 ```
 
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Java 21, Spring WebFlux, Redis, PostgreSQL, Kafka, Minio
+- **AI Service**: Python 3.10, FastAPI, Transformers (HuggingFace), CUDA
+- **Messaging**: WebSocket, Kafka
+- **DevOps**: Docker, Docker Compose
+
 ## Prerequisites
 - Node.js 20+
 - Java 21+
